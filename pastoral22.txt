@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sistema Pastoral v5.0</title>
+
+<style>
+
+body {
+  background-color: black;
+  color: #00ff88;
+  font-family: Consolas, monospace;
+  padding: 20px;
+}
+
+button {
+  background-color: black;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+input {
+  background-color: black;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 10px;
+}
+
+#contador {
+  margin-top:20px;
+  color:#00ffaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>⚡ SISTEMA PASTORAL v5.0 ⚡</h2>
+
+<p>Ingrese su nombre:</p>
+
+<input type="text" id="nombre">
+
+<br>
+
+<button onclick="iniciar()">INICIAR ANALISIS</button>
+
+<p id="resultado"></p>
+
+<p id="contador"></p>
+
+<audio id="sonido">
+<source src="https://www.soundjay.com/button/beep-07.wav">
+</audio>
+
+<script>
+
+function escribir(texto, i = 0){
+
+  if(i < texto.length){
+
+    document.getElementById("resultado").innerHTML += texto.charAt(i);
+
+    setTimeout(()=> escribir(texto, i+1), 18);
+
+  }
+
+}
+
+function debeMostrarEspecial(contador){
+
+  if(contador == 1) return true;
+  if(contador % 3 == 1) return true;
+  if(contador % 5 == 0) return true;
+
+  return false;
+
+}
+
+function iniciar(){
+
+  document.getElementById("sonido").play();
+
+  var nombre = document.getElementById("nombre").value.trim();
+
+  var nombreLower = nombre.toLowerCase();
+
+  document.getElementById("resultado").innerHTML = "";
+
+  if(nombre === ""){
+    escribir("ERROR: nombre no detectado...");
+    return;
+  }
+
+  var total = localStorage.getItem("totalAnalizados");
+
+  if(!total) total = 0;
+
+  total++;
+
+  localStorage.setItem("totalAnalizados", total);
+
+  document.getElementById("contador").innerHTML =
+  "Personas analizadas por el sistema: " + total;
+
+  var mensajesSerios = [
+
+    "Propósito detectado: SERVIR CON AMOR",
+    "Estado espiritual: EN CRECIMIENTO CONSTANTE",
+    "Nivel de fe: ESTABLE",
+    "Camino detectado: CORRECTO",
+    "Destino detectado: EN PROCESO"
+
+  ];
+
+  var mensajesGraciosos = [
+
+    "Sistema detectó corazón noble",
+    "Advertencia: consumo de refacciones detectado",
+    "Nivel de sueño analizado",
+    "Sistema detecta alegría interior"
+
+  ];
+
+  var mensajesDivinos = [
+
+    "Dios vio algo en ti que el mundo aún no ve.",
+    "No estás aquí por casualidad.",
+    "Tu presencia tiene propósito.",
+    "El cielo confía en ti.",
+    "Tu vida tiene significado."
+
+  ];
+
+  var mensajesVirgen = [
+
+    "La Virgen María cuida de ti.",
+    "María camina contigo.",
+    "Ella no te ha soltado.",
+    "La Virgen protege tu camino."
+
+  ];
+
+  var mensajesFinales = [
+
+    "Tu historia apenas comienza.",
+    "Sistema confirma: elegido.",
+    "Tu misión está activa."
+
+  ];
+
+  var serio = mensajesSerios[Math.floor(Math.random()*mensajesSerios.length)];
+  var gracioso = mensajesGraciosos[Math.floor(Math.random()*mensajesGraciosos.length)];
+  var divino = mensajesDivinos[Math.floor(Math.random()*mensajesDivinos.length)];
+  var virgen = mensajesVirgen[Math.floor(Math.random()*mensajesVirgen.length)];
+  var final = mensajesFinales[Math.floor(Math.random()*mensajesFinales.length)];
+
+  var especial = "";
+
+  // CONTADORES INDIVIDUALES
+
+  var contadorFer = localStorage.getItem("contadorFer") || 0;
+  var contadorPaola = localStorage.getItem("contadorPaola") || 0;
+  var contadorNanci = localStorage.getItem("contadorNanci") || 0;
+
+  // FER
+
+  if(nombreLower == "fer" || nombreLower == "fernanda"){
+
+    contadorFer++;
+    localStorage.setItem("contadorFer", contadorFer);
+
+    if(debeMostrarEspecial(contadorFer)){
+
+      var mensajesFer = [
+
+        "alguien está orgulloso de ti.\nAunque no lo diga.",
+        "tu presencia cambia más de lo que crees.",
+        "eres más importante de lo que imaginas.",
+        "tu luz no pasa desapercibida.",
+        "alguien agradece que estés en su vida."
+
+      ];
+
+      especial = "\n\nMENSAJE OCULTO:\n" +
+      mensajesFer[Math.floor(Math.random()*mensajesFer.length)];
+
+    }
+
+  }
+
+  // PAOLA
+
+  else if(nombreLower == "paola"){
+
+    contadorPaola++;
+    localStorage.setItem("contadorPaola", contadorPaola);
+
+    if(debeMostrarEspecial(contadorPaola)){
+
+      especial =
+      "\n\nMENSAJE PRIORITARIO:\n" +
+      "tu esfuerzo no es en vano dios ve tus lágrimas, y aunque no lo digan tus jóvenes están agradecidos contigo sigue así no te rindas❤️";
+
+    }
+
+  }
+
+  // NANCI
+
+  else if(nombreLower == "nanci"){
+
+    contadorNanci++;
+    localStorage.setItem("contadorNanci", contadorNanci);
+
+    if(debeMostrarEspecial(contadorNanci)){
+
+      var mensajesNanci = [
+
+        "tu forma de cuidar a los demás no pasa desapercibida.",
+        "Dios usa tu corazón para dar paz.",
+        "tu presencia trae calma a quienes te rodean.",
+        "eres luz incluso cuando no lo notas.",
+        "tu bondad está tocando vidas."
+
+      ];
+
+      especial =
+      "\n\nMENSAJE ESPIRITUAL:\n" +
+      mensajesNanci[Math.floor(Math.random()*mensajesNanci.length)];
+
+    }
+
+  }
+
+  // ADMIN
+
+  else if(nombreLower == "gilmer" || nombreLower == "mauricio" || nombreLower == "mau"){
+
+    especial =
+    "\n\nADMINISTRADOR DETECTADO.\nSistema bajo tu control.";
+
+  }
+
+  var texto =
+
+  "\nIniciando sistema...\n" +
+  "Conectando con servidor espiritual...\n" +
+  "Analizando corazón...\n\n" +
+
+  "Usuario: " + nombre + "\n\n" +
+
+  serio + "\n" +
+  gracioso + "\n\n" +
+
+  divino + "\n" +
+  virgen + "\n\n" +
+
+  "Estado: ACTIVO\n" +
+
+  especial + "\n\n" +
+
+  final;
+
+  escribir(texto);
+
+}
+
+</script>
+
+</body>
+</html>
